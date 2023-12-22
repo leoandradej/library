@@ -189,7 +189,7 @@ input:checked + .slider:before {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 30vh;
+    padding-top: 20vh;
     left: 0;
     top: 0;
     width: 100%;
@@ -259,11 +259,15 @@ input:checked + .slider:before {
     border-radius: .5rem;
 }
 
+.modal-form-input.error {
+    outline-color: rgb(255, 0, 0);
+}
+
 .modal-input-field {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 1.25rem;
+    padding-bottom: .3rem;
 }
 
 .container {
@@ -308,4 +312,16 @@ input:checked + .slider:before {
     border-radius: .55rem;
     font-size: 1rem;
     font-weight: 550;
+    cursor: pointer;
+}
+
+.error-message {
+    font-size: .8rem;
+    color: transparent;
+    margin-left: 4rem;
+    margin-bottom: 1rem;
+}
+
+.error-message.active{
+    color: rgb(255, 0, 0);
 }

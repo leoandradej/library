@@ -20,12 +20,22 @@ span.addEventListener("click", () => {
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.id = Math.floor(Math.random() * 1000000);
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+//     this.id = Math.floor(Math.random() * 1000000);
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = Math.floor(Math.random() * 1000000);
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -41,7 +51,7 @@ function addLocalStorage() {
 function createBookElement(el, content, className) {
     const element = document.createElement(el);
     element.textContent = content;
-    element.setAttribute('class', className);
+    element.setAttribute("class", className);
     return element;
 }
 
@@ -143,6 +153,24 @@ addBookForm.addEventListener("submit", (e) => {
         newBook["book-read"] = false;
     }
 
+    if (newBook["book-title"] === "" || newBook["book-title"] == null) {
+        document.querySelector("#book-title").classList.add("error");
+        document.querySelector(".error-message.book-title").classList.add("active");
+        return;
+    }
+
+    if (newBook["book-author"] === "" || newBook["book-author"] == null) {
+        document.querySelector("#book-author").classList.add("error");
+        document.querySelector(".error-message.book-author").classList.add("active");
+        return;
+    }
+
+    if (newBook["book-pages"] === "" || newBook["book-pages"] == null) {
+        document.querySelector("#book-pages").classList.add("error");
+        document.querySelector(".error-message.book-pages").classList.add("active");
+        return;
+    }
+
     if (document.querySelector(".form-title").textContent === "Edit Book") {
         let id = e.target.id;
         let editBook = myLibrary.filter((book) => book.id == id)[0];
@@ -153,11 +181,11 @@ addBookForm.addEventListener("submit", (e) => {
         saveAndRenderBooks();
     } else {
         addBookToLibrary(
-        newBook["book-title"],
-        newBook["book-author"],
-        newBook["book-pages"],
-        newBook["book-read"]
-    );
+            newBook["book-title"],
+            newBook["book-author"],
+            newBook["book-pages"],
+            newBook["book-read"]
+        );
     }
 
     addBookForm.reset();
@@ -181,4 +209,25 @@ function saveAndRenderBooks() {
     renderBooks();
 }
 
+function validateInputs() {
+    if (newBook["book-title"] === "" || newBook["book-title"] == null) {
+        document.querySelector("#book-title").classList.add("error");
+        document.querySelector(".error-message.book-title").classList.add("active");
+        return;
+    }
+
+    if (newBook["book-author"] === "" || newBook["book-author"] == null) {
+        document.querySelector("#book-author").classList.add("error");
+        document.querySelector(".error-message.book-author").classList.add("active");
+        return;
+    }
+
+    if (newBook["book-pages"] === "" || newBook["book-pages"] == null) {
+        document.querySelector("#book-pages").classList.add("error");
+        document.querySelector(".error-message.book-pages").classList.add("active");
+        return;
+    }
+}
+
 addLocalStorage();
+
